@@ -10,22 +10,22 @@ import pickle
 
 # read files, retain object variables and add "cohort" column
 file1 = pd.read_sas("DEMO_G.XPT")
-main1 = file1.loc[:, ["SEQN", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
+main1 = file1.loc[:, ["SEQN", "RIDAGEYR", "RIAGENDR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
                     "RIDSTATR", "SDMVPSU", "SDMVSTRA", "WTMEC2YR", "WTINT2YR"]]
 main1.insert(main1.shape[1], "cohort", ["G" for i in range(main1.shape[0])])
 
 file2 = pd.read_sas("DEMO_H.XPT")
-main2 = file2.loc[:, ["SEQN", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
+main2 = file2.loc[:, ["SEQN", "RIDAGEYR", "RIAGENDR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
                     "RIDSTATR", "SDMVPSU", "SDMVSTRA", "WTMEC2YR", "WTINT2YR"]]
 main2.insert(main2.shape[1], "cohort", ["H" for i in range(main2.shape[0])])
 
 file3 = pd.read_sas("DEMO_I.XPT")
-main3 = file3.loc[:, ["SEQN", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
+main3 = file3.loc[:, ["SEQN", "RIDAGEYR", "RIAGENDR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
                     "RIDSTATR", "SDMVPSU", "SDMVSTRA", "WTMEC2YR", "WTINT2YR"]]
 main3.insert(main3.shape[1], "cohort", ["I" for i in range(main3.shape[0])])
 
 file4 = pd.read_sas("DEMO_J.XPT")
-main4 = file4.loc[:, ["SEQN", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
+main4 = file4.loc[:, ["SEQN", "RIDAGEYR", "RIAGENDR", "RIDRETH3", "DMDEDUC2", "DMDMARTL",
                     "RIDSTATR", "SDMVPSU", "SDMVSTRA", "WTMEC2YR", "WTINT2YR"]]
 main4.insert(main4.shape[1], "cohort", ["J" for i in range(main4.shape[0])])
 
@@ -43,11 +43,13 @@ result1["DMDEDUC2"] = result1["DMDEDUC2"].apply(lambda x: -1 if pd.isnull(x)
 result1["DMDMARTL"] = result1["DMDMARTL"].apply(lambda x: -1 if pd.isnull(x)
                                                 else x)
 # rename columns
-result1 = result1.rename(columns={"SEQN": "unique_ids", "RIDAGEYR": "age",
+result1 = result1.rename(columns={"SEQN": "unique_ids", "RIDAGEYR": "age", "RIAGENDR": "gender", 
                                 "RIDRETH3": "race_ethnicity", "DMDEDUC2": "education",
                                 "DMDMARTL": "marital_status", "RIDSTATR": "weight1", 
                                 "SDMVPSU": "weight2", "SDMVSTRA": "weight3", 
                                 "WTMEC2YR": "weight4", "WTINT2YR": "weight5"})
+result1["gender"] = result1["gender"].apply(lambda x: "male" if x==1 else "female")
+
 # save result1
 file = open("demographic_data.pkl", "wb")
 pickle.dump(result1, file)
