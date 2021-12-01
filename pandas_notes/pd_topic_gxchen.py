@@ -16,7 +16,7 @@
 # ## Problem Set 6: pd_topic_gxchen.py
 # **Stats 507, Fall 2021**  
 # *Guixian Chen*
-# *gxchen@umich.edu*
+# gxchen@umich.edu
 # *November, 2021*
 
 # ## Table Styles
