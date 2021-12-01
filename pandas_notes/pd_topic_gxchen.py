@@ -13,6 +13,12 @@
 #     name: python3
 # ---
 
+# ## Problem Set 6: pd_topic_gxchen.py
+# **Stats 507, Fall 2021**  
+# *Guixian Chen*
+# *gxchen@umich.edu*
+# *November, 2021*
+
 # ## Table Styles
 # * `pandas.io.formats.style.Styler` helps style a DataFrame or Series (table) according to the data with HTML and CSS.
 # * Using `.set_table_styles()` from `pandas.io.formats.style.Styler` to control areas of the table with specified internal CSS.
